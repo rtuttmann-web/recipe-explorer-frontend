@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Preloader from "../Preloader/Preloader.jsx";
 import ErrorAlert from "../ErrorAlert/ErrorAlert.jsx";
+import Modal from "../Modal/Modal.jsx";
 import {
   MAX_INGREDIENTS,
   RECIPE_ERROR_MESSAGE,
@@ -36,6 +37,15 @@ function RecipePage({ onLoadRecipe }) {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [status, setStatus] = useState("loading");
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
+  const handleImageClose = useCallback(() => {
+    setIsImageOpen(false);
+  }, []);
+
+  function handleImageOpen() {
+    setIsImageOpen(true);
+  }
 
   useEffect(() => {
     let isActive = true;
@@ -101,11 +111,18 @@ function RecipePage({ onLoadRecipe }) {
       {backLink}
       <article className="recipe">
         <div className="recipe__intro">
-          <img
-            className="recipe__image"
-            src={recipe.strMealThumb}
-            alt={recipe.strMeal}
-          />
+          <button
+            className="recipe__image-button"
+            type="button"
+            aria-label="Ampliar a foto"
+            onClick={handleImageOpen}
+          >
+            <img
+              className="recipe__image"
+              src={recipe.strMealThumb}
+              alt={recipe.strMeal}
+            />
+          </button>
           <div className="recipe__summary">
             <p className="recipe__tags">
               {[recipe.strCategory, recipe.strArea]
@@ -156,6 +173,24 @@ function RecipePage({ onLoadRecipe }) {
           ))}
         </section>
       </article>
+
+      <Modal
+        name="image"
+        title={recipe.strMeal}
+        isOpen={isImageOpen}
+        onClose={handleImageClose}
+      >
+        <figure className="recipe__figure">
+          <img
+            className="recipe__figure-image"
+            src={recipe.strMealThumb}
+            alt={recipe.strMeal}
+          />
+          <figcaption className="recipe__figure-caption">
+            {recipe.strMeal}
+          </figcaption>
+        </figure>
+      </Modal>
     </main>
   );
 }
