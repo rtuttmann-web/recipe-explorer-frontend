@@ -4,21 +4,27 @@ import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import RecipePage from "../RecipePage/RecipePage.jsx";
 import Footer from "../Footer/Footer.jsx";
-import { getRecipeById, searchRecipes } from "../../utils/api.js";
+import { getRecipeById, searchRecipes } from "../../utils/TheMealDbApi.js";
+import { loadLastSearch, saveLastSearch } from "../../utils/storage.js";
 import {
   RECIPES_PER_PAGE,
   SEARCH_ERROR_MESSAGE,
 } from "../../utils/constants.js";
 import "./App.css";
 
+// a última busca é lida do armazenamento local uma vez, ao carregar o app
+const lastSearch = loadLastSearch();
+
 function App() {
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(lastSearch?.recipes ?? []);
+  const [lastQuery, setLastQuery] = useState(lastSearch?.query ?? "");
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [hasSearched, setHasSearched] = useState(Boolean(lastSearch));
   const [searchError, setSearchError] = useState("");
   const [visibleCount, setVisibleCount] = useState(RECIPES_PER_PAGE);
 
   function handleSearch(query) {
+    setLastQuery(query);
     setIsLoading(true);
     setHasSearched(true);
     setSearchError("");
@@ -27,7 +33,9 @@ function App() {
     searchRecipes(query)
       .then((data) => {
         // a TheMealDB devolve { meals: null } quando não encontra nada
-        setRecipes(data.meals || []);
+        const foundRecipes = data.meals || [];
+        setRecipes(foundRecipes);
+        saveLastSearch(query, foundRecipes);
       })
       .catch((error) => {
         console.error(error);
@@ -62,6 +70,7 @@ function App() {
           element={
             <Main
               recipes={recipes}
+              lastQuery={lastQuery}
               visibleCount={visibleCount}
               isLoading={isLoading}
               hasSearched={hasSearched}

@@ -11,6 +11,7 @@ Aplicativo web para buscar receitas do mundo inteiro. O usuário digita o nome d
 - **Resultados em cartões**, exibidos de 3 em 3, com o botão **"Mostrar mais"**.
 - Mensagens de **"Nada encontrado"** e de **erro de conexão** com a API.
 - **Página de cada receita** (`/recipe/:id`): foto, categoria, país de origem, lista de ingredientes com as quantidades, modo de preparo e link para o vídeo no YouTube.
+- **A última busca fica salva** no armazenamento local (`localStorage`): ao fechar a aba e voltar ao site, os resultados reaparecem.
 - **Modal com a foto ampliada**, que fecha pelo botão X, pelo clique fora da janela ou pela tecla Esc.
 - **Menu de navegação** com versão móvel (menu sanduíche).
 - Conteúdo da API marcado com `lang="en"`, para tradutores do navegador e leitores de tela.
@@ -31,7 +32,8 @@ Aplicativo web para buscar receitas do mundo inteiro. O usuário digita o nome d
 - **React 19** com componentes funcionais e hooks (`useState`, `useEffect`, `useRef`, `useCallback`)
 - **React Router 6** (rotas, `NavLink`, `useParams`, `Navigate`)
 - **Vite** para o ambiente de desenvolvimento e o build
-- **API Fetch** para as requisições, reunidas em `src/utils/api.js`
+- **API Fetch** para as requisições, reunidas em `src/utils/TheMealDbApi.js`
+- **localStorage** para guardar a última busca
 - **CSS** com metodologia **BEM**, Flexbox e Grid, media queries e microanimações
 - Fonte **Inter** conectada com `@font-face` (WOFF2 e WOFF) e **normalize.css**
 - HTML semântico e acessibilidade (`aria-*`, `role`, `lang`)
@@ -56,7 +58,7 @@ As receitas da TheMealDB estão em inglês.
 src/
 ├── components/   cada componente na sua pasta, com .jsx e .css
 ├── images/       ícones SVG
-├── utils/        api.js (requisições) e constants.js (constantes)
+├── utils/        TheMealDbApi.js (requisições), storage.js (localStorage) e constants.js (constantes)
 ├── vendor/       normalize.css e as fontes
 ├── index.css
 └── main.jsx

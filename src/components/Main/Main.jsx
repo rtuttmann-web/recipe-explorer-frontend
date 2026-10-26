@@ -10,6 +10,7 @@ import "./Main.css";
 
 function Main({
   recipes,
+  lastQuery,
   visibleCount,
   isLoading,
   hasSearched,
@@ -48,7 +49,11 @@ function Main({
           cake, e descubra receitas de vários países, com ingredientes, modo de
           preparo e vídeo.
         </p>
-        <SearchForm onSearch={onSearch} isLoading={isLoading} />
+        <SearchForm
+          onSearch={onSearch}
+          isLoading={isLoading}
+          initialQuery={lastQuery}
+        />
       </section>
 
       <div className="main__results" ref={resultsRef}>
