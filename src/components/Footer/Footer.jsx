@@ -1,6 +1,5 @@
+import { CURRENT_YEAR } from "../../utils/constants.js";
 import "./Footer.css";
-
-const CURRENT_YEAR = new Date().getFullYear();
 
 function Footer() {
   return (

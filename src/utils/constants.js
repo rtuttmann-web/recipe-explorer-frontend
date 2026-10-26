@@ -9,3 +9,5 @@ export const RECIPE_ERROR_MESSAGE =
   "Não foi possível carregar a receita. Verifique a sua conexão e tente novamente.";
 
 export const MAX_INGREDIENTS = 20;
+
+export const CURRENT_YEAR = new Date().getFullYear();
