@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import RecipePage from "../RecipePage/RecipePage.jsx";
 import Footer from "../Footer/Footer.jsx";
-import { searchRecipes } from "../../utils/api.js";
+import { getRecipeById, searchRecipes } from "../../utils/api.js";
 import {
   RECIPES_PER_PAGE,
   SEARCH_ERROR_MESSAGE,
@@ -43,6 +43,12 @@ function App() {
     setVisibleCount((count) => count + RECIPES_PER_PAGE);
   }
 
+  // busca uma receita pelo número; devolve null se ela não existir
+  const loadRecipe = useCallback(
+    (id) => getRecipeById(id).then((data) => (data.meals ? data.meals[0] : null)),
+    []
+  );
+
   function handleErrorClose() {
     setSearchError("");
   }
@@ -66,7 +72,10 @@ function App() {
             />
           }
         />
-        <Route path="/recipe/:id" element={<RecipePage />} />
+        <Route
+          path="/recipe/:id"
+          element={<RecipePage onLoadRecipe={loadRecipe} />}
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
