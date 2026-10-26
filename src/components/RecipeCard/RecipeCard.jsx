@@ -14,7 +14,7 @@ function RecipeCard({ recipe }) {
           alt={strMeal}
           loading="lazy"
         />
-        <div className="recipe-card__content">
+        <div className="recipe-card__content" lang="en">
           <p className="recipe-card__category">{strCategory}</p>
           <h3 className="recipe-card__title">{strMeal}</h3>
           <p className="recipe-card__text">{strInstructions}</p>

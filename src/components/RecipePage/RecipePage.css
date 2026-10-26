@@ -197,6 +197,22 @@
   max-width: 820px;
 }
 
+.recipe__language-note {
+  margin: 0;
+  padding: 12px 20px;
+  border-radius: 30px;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  color: #8b8b8b;
+}
+
+.recipe__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .recipe__step {
   margin: 0;
   font-size: 16px;

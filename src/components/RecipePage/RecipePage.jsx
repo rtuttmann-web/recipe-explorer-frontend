@@ -124,18 +124,20 @@ function RecipePage({ onLoadRecipe }) {
             />
           </button>
           <div className="recipe__summary">
-            <p className="recipe__tags">
+            <p className="recipe__tags" lang="en">
               {[recipe.strCategory, recipe.strArea]
                 .filter(Boolean)
                 .join(" · ")}
             </p>
-            <h1 className="recipe__title">{recipe.strMeal}</h1>
+            <h1 className="recipe__title" lang="en">
+              {recipe.strMeal}
+            </h1>
 
             <section className="recipe__ingredients">
               <h2 className="recipe__subtitle">
                 Ingredientes ({ingredients.length})
               </h2>
-              <ul className="recipe__ingredient-list">
+              <ul className="recipe__ingredient-list" lang="en">
                 {ingredients.map((ingredient) => (
                   <li className="recipe__ingredient" key={ingredient.id}>
                     <span className="recipe__ingredient-name">
@@ -165,12 +167,18 @@ function RecipePage({ onLoadRecipe }) {
         </div>
 
         <section className="recipe__instructions">
+          <p className="recipe__language-note">
+            As receitas estão em inglês. Para traduzir, use a tradução do seu
+            navegador.
+          </p>
           <h2 className="recipe__subtitle">Modo de preparo</h2>
-          {steps.map((step) => (
-            <p className="recipe__step" key={step}>
-              {step}
-            </p>
-          ))}
+          <div className="recipe__steps" lang="en">
+            {steps.map((step) => (
+              <p className="recipe__step" key={step}>
+                {step}
+              </p>
+            ))}
+          </div>
         </section>
       </article>
 
@@ -186,7 +194,7 @@ function RecipePage({ onLoadRecipe }) {
             src={recipe.strMealThumb}
             alt={recipe.strMeal}
           />
-          <figcaption className="recipe__figure-caption">
+          <figcaption className="recipe__figure-caption" lang="en">
             {recipe.strMeal}
           </figcaption>
         </figure>
