@@ -173,8 +173,8 @@ function RecipePage({ onLoadRecipe }) {
           </p>
           <h2 className="recipe__subtitle">Modo de preparo</h2>
           <div className="recipe__steps" lang="en">
-            {steps.map((step) => (
-              <p className="recipe__step" key={step}>
+            {steps.map((step, index) => (
+              <p className="recipe__step" key={`${index}-${step}`}>
                 {step}
               </p>
             ))}

@@ -8,7 +8,7 @@ function Footer() {
         © {CURRENT_YEAR} Ricardo Tuttmann. Dados de receitas: TheMealDB.
       </p>
       <ul className="footer__links">
-        <li>
+        <li className="footer__item">
           <a
             className="footer__link"
             href="https://github.com/rtuttmann-web"
@@ -18,7 +18,7 @@ function Footer() {
             GitHub
           </a>
         </li>
-        <li>
+        <li className="footer__item">
           <a
             className="footer__link"
             href="https://tripleten.com"
@@ -28,7 +28,7 @@ function Footer() {
             TripleTen
           </a>
         </li>
-        <li>
+        <li className="footer__item">
           <a
             className="footer__link"
             href="https://www.themealdb.com"
