@@ -47,6 +47,11 @@ function RecipePage({ onLoadRecipe }) {
     setIsImageOpen(true);
   }
 
+  // ao abrir uma receita, começa sempre do topo da página
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   useEffect(() => {
     let isActive = true;
 
