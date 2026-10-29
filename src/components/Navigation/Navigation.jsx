@@ -15,6 +15,11 @@ function Navigation() {
     setIsMenuOpen(false);
   }
 
+  function handleHomeClick() {
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   function getHomeLinkClassName({ isActive }) {
     return `navigation__link${
       isActive && !isAboutActive ? " navigation__link_active" : ""
@@ -42,7 +47,7 @@ function Navigation() {
             className={getHomeLinkClassName}
             to="/"
             end
-            onClick={handleLinkClick}
+            onClick={handleHomeClick}
           >
             Início
           </NavLink>

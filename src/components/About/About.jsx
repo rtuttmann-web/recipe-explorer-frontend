@@ -1,7 +1,12 @@
+import { Link } from "react-router-dom";
 import authorPhoto from "../../images/author.jpg";
 import "./About.css";
 
 function About() {
+  function handleBackClick() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <section className="about" id="about">
       <div className="about__container">
@@ -24,6 +29,9 @@ function About() {
             MongoDB e a publicar aplicações em servidores na nuvem. Este projeto
             usa React e a API pública TheMealDB.
           </p>
+          <Link className="about__back-link" to="/" onClick={handleBackClick}>
+            ↑ Voltar ao início
+          </Link>
         </div>
       </div>
     </section>
